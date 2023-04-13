@@ -1,17 +1,42 @@
-import React from 'react'
+import { useRouter } from 'next/router'
+import React, { useCallback } from 'react'
 import { IconType } from 'react-icons'
+import useCurrentUser from "@/hooks/useCurrentUser"
+import useLoginModal from '@/hooks/useLoginModal'
 
 type Props = {
     label:string,
     href?:string,
     icon: IconType
     click?: () => void
+    auth?: boolean // indicates a protected route
 }
 
 const SidebarItem = (props: Props) => {
-    const { label, href, icon:Icon, click } = props
+    const { label, href, icon:Icon, click, auth } = props
+
+    const { data:currentuser } = useCurrentUser()
+
+    const router = useRouter()
+    const loginModal = useLoginModal()
+
+    const handleClick = useCallback(()=>{
+        if(click){
+            return click()
+        }
+
+        if(auth && !currentuser){
+            // auth is present and there is no currentuser in the session
+            // open the login modal
+            loginModal.onOpen()
+        } else if(href){
+            router.push(href)
+        }
+        
+    },[router, href, click, auth, currentuser, loginModal])
+
     return (
-        <div className='flex flex-row items-center'>
+        <div className='flex flex-row items-center' onClick={handleClick}>
             {/* mobile first div */}
             <div
                 className='
