@@ -33,7 +33,7 @@ const RegisterModal = (props: Props) => {
 
             registerModal.onClose()
         } catch (error) {
-            console.log(error)
+            console.log("ERROR REGISTERING USER--->", error)
             toast.error("Something went wrong")
         } finally{
             setIsloading(false)
