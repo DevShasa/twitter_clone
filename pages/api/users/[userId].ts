@@ -21,8 +21,6 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse){
         })
 
         const followerCount = await prisma.user.count({
-            // Go through all the followingIds and count where userId is in there...
-            // Meaning those people follow this user
             where:{
                 followingIds:{
                     has:userId
