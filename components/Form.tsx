@@ -49,7 +49,54 @@ const Form = ({placeholder, isComment, postId}: Props) => {
     },[body, mutatePosts, isComment, postId, mutatePost])
 
     return (
-        <div>Form</div>
+        <div className="border-b-[1px] border-neutral-800 px-5 py-2">
+            {currentUser 
+                ?(
+                    <div className='flex flex-row gap-4'>
+                        <div>
+                            <Avatar userId={currentUser?.id}/>
+                        </div>
+                        <div className='w-full'>
+                            <textarea
+                                disabled={isLoading}
+                                onChange={(event)=>setBody(event.target.value)}
+                                value={body}
+                                className='
+                                    disabled:opacity:80
+                                    resize-none
+                                    peer
+                                    mt-3
+                                    w-full
+                                    bg-black
+                                    ring-0
+                                    outline-none
+                                    text-[20px]
+                                    placeholder-neutral-500
+                                    text-white
+                                '
+                                placeholder={placeholder}
+                            >
+                            </textarea>
+                            {/* <hr className='opacity-0 peer-focus:opacity-100 h-[2px] w-full border-neutral-800 transition'/> */}
+                            <div className="mt-4 flex flex-row justify-end">
+                                <Button disabled={isLoading || !body} click={onSubmit} label='Tweet'/>
+                            </div>
+                        </div>
+                    </div>
+                )
+                :(
+                    <div className='py-8'>
+                        <h1 className='text-white text-2xl text-center mb-4 font-bold'>
+                            Welcome to
+                        </h1>
+                        <div className='flex flex-row items-center justify-center gap-4'>
+                            <Button label="Login" click={loginModal.onOpen}/>
+                            <Button label="Register" click={registerModal.onOpen}/>
+                        </div>
+                    </div>
+                )
+            }
+        </div>
     )
 }
 

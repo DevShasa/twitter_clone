@@ -16,7 +16,6 @@ const UserProfile = (props: Props) => {
     const { data:fetchedUser, isLoading,  } = useUser(userId as  string)
 
     if(isLoading || !fetchedUser){
-    // if(true){
         return(
             <div
                 className='
