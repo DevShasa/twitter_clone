@@ -21,8 +21,6 @@ async function handler(req:NextApiRequest, res:NextApiResponse){
 
         if(req.method === "GET"){
             const { userId } = req.query
-            console.log("USERID FETCHED FROM POST IN api/post", userId)
-
             let posts
 
             if(userId && typeof userId ==="string"){

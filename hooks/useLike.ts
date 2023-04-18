@@ -33,17 +33,25 @@ const useLike = (args:IuseLike) =>{
         }
 
         try {
-            let request
             if (hasLiked){
-                request = ()=> axios.delete(`/api/like`, {data:{postId}}) // a delete id must explicitly state data
+                console.log("DELETE ACTION POSTID", postId)
+                //await axios.patch('/api/like', { data: { postId} });
+
+            await fetch( '/api/like', {
+                    method: 'PATCH',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({postId:postId})
+                })
+                toast.success("Success")
+
             }else{
-                request = ()=> axios.post(`/api/like`, {postId})
+                await axios.post(`/api/like`, {postId})
+                toast.success("Success")
             }
 
-            await request()
             mutateFetchedPost()
             mutateFetchedPosts()
-            toast.success("Success")
+            
         } catch (error) {
             console.log("Error perfoming like operation", error)
             toast.error("Something went wrong")

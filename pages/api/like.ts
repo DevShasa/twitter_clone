@@ -4,6 +4,8 @@ import serverAuth from "@/libs/serverAuth";
 import { withMethods } from "@/middleware/withMethod";
 
 async function handler(req:NextApiRequest, res:NextApiResponse){
+    console.log("POST IDELETE", req.body)
+    console.log("REQUEST METHOD", req.method)
     try {
         const { postId } = req.body;
         const { currentUser } = await serverAuth(req, res)
@@ -55,7 +57,7 @@ async function handler(req:NextApiRequest, res:NextApiResponse){
 
         }
 
-        if(req.method ==="DELETE"){
+        if(req.method ==="PATCH"){
             updatedLikedIds = updatedLikedIds.filter(lId => lId !== currentUser?.id)
         }
 
@@ -77,4 +79,4 @@ async function handler(req:NextApiRequest, res:NextApiResponse){
     }
 }
 
-export default withMethods(["POST", "DELETE"], handler)
+export default withMethods(["POST", "DELETE", "PATCH"], handler)
