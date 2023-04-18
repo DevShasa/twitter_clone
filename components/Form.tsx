@@ -8,7 +8,6 @@ import usePosts from '@/hooks/usePosts'
 import usePost from '@/hooks/usePost'
 import Avatar from './Avatar'
 import Button from './Button'
-import PostId from '@/pages/api/posts/[postId]'
 
 type Props = {
     placeholder:string,
@@ -53,7 +52,7 @@ const Form = ({placeholder, isComment, postId}: Props) => {
             {currentUser 
                 ?(
                     <div className='flex flex-row gap-4'>
-                        <div>
+                        <div className='mt-4'>
                             <Avatar userId={currentUser?.id}/>
                         </div>
                         <div className='w-full'>
@@ -73,6 +72,7 @@ const Form = ({placeholder, isComment, postId}: Props) => {
                                     text-[20px]
                                     placeholder-neutral-500
                                     text-white
+                                    focus:outline-neutral-600 outline-1 outline-offset-1 rounded p-4
                                 '
                                 placeholder={placeholder}
                             >
