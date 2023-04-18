@@ -21,11 +21,13 @@ const Form = ({placeholder, isComment, postId}: Props) => {
     const loginModal = useLoginModal()
 
     const { data:currentUser } = useCurrentUser();
-    const { mutate:mutatePosts } = usePosts();
+    const { data:allPosts, mutate:mutatePosts } = usePosts();
     const { mutate:mutatePost } = usePost(postId as string)
 
     const [ body, setBody ] = useState('')
     const [ isLoading, setIsLoading ] = useState(false)
+
+    console.log("ALL OF THE POSTS",  allPosts)
 
     const onSubmit = useCallback(async()=>{
         try {
@@ -37,7 +39,7 @@ const Form = ({placeholder, isComment, postId}: Props) => {
             toast.success("Success created")
             setBody('')
             mutatePost()
-            mutatePosts()
+            mutatePosts()   
 
         } catch (error) {
             toast.error("Something went wrong")
@@ -87,7 +89,7 @@ const Form = ({placeholder, isComment, postId}: Props) => {
                 :(
                     <div className='py-8'>
                         <h1 className='text-white text-2xl text-center mb-4 font-bold'>
-                            Welcome to
+                            Welcome to twitter
                         </h1>
                         <div className='flex flex-row items-center justify-center gap-4'>
                             <Button label="Login" click={loginModal.onOpen}/>
