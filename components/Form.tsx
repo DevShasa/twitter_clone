@@ -2,7 +2,7 @@ import {useCallback, useState} from 'react'
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
 import useLoginModal from '@/hooks/useLoginModal'
-import useRegisterModal from '@/hooks/useEditModal'
+import useRegisterModal from '@/hooks/useRegisterModal'
 import useCurrentUser from '@/hooks/useCurrentUser'
 import usePosts from '@/hooks/usePosts'
 import usePost from '@/hooks/usePost'
@@ -21,7 +21,7 @@ const Form = ({placeholder, isComment, postId}: Props) => {
     const loginModal = useLoginModal()
 
     const { data:currentUser } = useCurrentUser();
-    const { data:allPosts, mutate:mutatePosts } = usePosts();
+    const { data:allPosts, mutate:mutatePosts } = usePosts(); // fetching all the posts
     const { mutate:mutatePost } = usePost(postId as string)
 
     const [ body, setBody ] = useState('')
@@ -39,7 +39,7 @@ const Form = ({placeholder, isComment, postId}: Props) => {
             toast.success("Success created")
             setBody('')
             mutatePost()
-            mutatePosts()   
+            mutatePosts() // refresh catch
 
         } catch (error) {
             toast.error("Something went wrong")
@@ -53,6 +53,7 @@ const Form = ({placeholder, isComment, postId}: Props) => {
         <div className="border-b-[1px] border-neutral-800 px-5 py-2">
             {currentUser 
                 ?(
+                    // user logged in, display the textbox
                     <div className='flex flex-row gap-4'>
                         <div className='mt-4'>
                             <Avatar userId={currentUser?.id}/>
@@ -87,6 +88,7 @@ const Form = ({placeholder, isComment, postId}: Props) => {
                     </div>
                 )
                 :(
+                    // user not logged in prompt them to login or register
                     <div className='py-8'>
                         <h1 className='text-white text-2xl text-center mb-4 font-bold'>
                             Welcome to twitter

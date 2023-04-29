@@ -23,6 +23,7 @@ const PostItem = (props: Props) => {
     const { hasLiked, toggleLike } = useLike({postId: data.id, userId})
 
     const gotoUser = useCallback((e:any)=>{
+        // when the  user clicks on a profile, go the user's homepage
         e.stopPropagation();
         router.push(`/users/${data.user.id}`)
     },[router, data.user.id])

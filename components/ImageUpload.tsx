@@ -24,7 +24,7 @@ const ImageUpload = ({change, label, disabled , value}: Props) => {
         reader.onload = (event:any)=>{
             // once base64 encoded is obtained update state with the string
             setBase64(event.target.result)
-            handleChange(event.target.result)
+            handleChange(event.target.result) // pass the base64 url to the state
         }
 
         // convert image binary to base64 encoded

@@ -28,7 +28,7 @@ async function handler(req:NextApiRequest, res:NextApiResponse){
 
         return res.status(200).json(post)
     }catch(error){
-        console.log("Error fetching individual error")
+        console.log("Error fetching individual post posts/[postid]")
         return res.status(400).end()
     }
 }
