@@ -16,6 +16,7 @@ async function handler(req:NextApiRequest, res:NextApiResponse){
         }
 
         const post = await prisma.post.findUnique({
+            // find the post 
             where:{
                 id: postId
             }
@@ -25,6 +26,7 @@ async function handler(req:NextApiRequest, res:NextApiResponse){
             throw new Error("Could not find post")
         }
 
+        // post has been found, extract the liked ids 
         let updatedLikedIds = [...(post.likedIds || [])]
 
         if(req.method === "POST"){
@@ -58,6 +60,7 @@ async function handler(req:NextApiRequest, res:NextApiResponse){
         }
 
         if(req.method ==="PATCH"){
+            // remove the id of current user from the post's likedid's 
             updatedLikedIds = updatedLikedIds.filter(lId => lId !== currentUser?.id)
         }
 

@@ -27,7 +27,7 @@ const LoginModal = (props: Props) => {
 
             loginModal.onClose()
         } catch (error) {
-            console.log(error)
+            console.log("ERROR WHEN ATTEMPTING TO LOG IN ----->",error)
             toast.error("Something went wrong")
         } finally{
             setIsloading(false)

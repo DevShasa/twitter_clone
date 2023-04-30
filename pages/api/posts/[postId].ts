@@ -3,6 +3,8 @@ import prisma from "@/libs/prismadb"
 import { withMethods } from "@/middleware/withMethod";
 
 async function handler(req:NextApiRequest, res:NextApiResponse){
+
+
     try{
         const { postId } = req.query
         if(!postId || typeof postId !== 'string'){

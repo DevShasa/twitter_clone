@@ -28,7 +28,8 @@ const PostItem = (props: Props) => {
         router.push(`/users/${data.user.id}`)
     },[router, data.user.id])
 
-    const gotoPost = useCallback(()=>{
+    const gotoPost = useCallback((e:any)=>{
+        e.stopPropagation();
         router.push(`/posts/${data.id}`)
     },[router, data.id])
 
@@ -64,7 +65,7 @@ const PostItem = (props: Props) => {
                 transition
             "
         >
-            <div className="flex flex-row items-start gap-3" gap-3>
+            <div className="flex flex-row items-start gap-3" >
                 <Avatar userId={data.user.id}/>
                 <div>
                     <div className="flex flex-row items-center gap-2">

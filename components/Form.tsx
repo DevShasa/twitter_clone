@@ -27,7 +27,7 @@ const Form = ({placeholder, isComment, postId}: Props) => {
     const [ body, setBody ] = useState('')
     const [ isLoading, setIsLoading ] = useState(false)
 
-    console.log("ALL OF THE POSTS",  allPosts)
+    //console.log("ALL OF THE POSTS",  allPosts)
 
     const onSubmit = useCallback(async()=>{
         try {

@@ -37,10 +37,10 @@ const useLike = (args:IuseLike) =>{
                 console.log("DELETE ACTION POSTID", postId)
                 //await axios.patch('/api/like', { data: { postId} });
 
-            await fetch( '/api/like', {
-                    method: 'PATCH',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({postId:postId})
+                await fetch( '/api/like', {
+                        method: 'PATCH',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({postId:postId})
                 })
                 toast.success("Success")
 

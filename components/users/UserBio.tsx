@@ -5,7 +5,7 @@ import useCurrentUser from '@/hooks/useCurrentUser'
 import useUser from "@/hooks/useUser";
 import Button from '../Button';
 import useEditModal from '@/hooks/useEditModal';
-
+import useFollow from '@/hooks/useFollow';
 
 type Props = {
     userId:string
@@ -17,6 +17,8 @@ const UserBio = (props: Props) => {
     const { data:currentUser } = useCurrentUser() // user who is logged into the session
     const { data:fetchedUser } = useUser(userId) // fetch user from the url params
     const editModal = useEditModal()
+
+    const { isFollowing, toggleFollow } = useFollow(userId)
 
     const createdAt = useMemo(()=>{
         // by using useMemo, the value of createdAt wont be...
@@ -32,9 +34,10 @@ const UserBio = (props: Props) => {
                     ? <Button secondary label="Edit" click={editModal.onOpen}/>
                     : (
                         <Button 
-                            click={()=>{}}
-                            label= {"Unfollow"}
-                            secondary 
+                            click={toggleFollow}
+                            label= {isFollowing ? "Unfollow" :"Follow"}
+                            secondary = {!isFollowing}
+                            outline = {isFollowing}
                         />
                     )
                 }
