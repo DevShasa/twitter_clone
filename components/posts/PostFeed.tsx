@@ -10,6 +10,8 @@ const PostFeed = (props: Props) => {
     const { userId } = props
     const { data:posts = [] } = usePosts(userId)
 
+    console.log("ALL OF THE POSTS",posts)
+
     return (
         <>
             {posts.map((post: Record<string, any>)=>(
