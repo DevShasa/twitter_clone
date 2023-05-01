@@ -3,6 +3,7 @@ import React, { useCallback } from 'react'
 import { IconType } from 'react-icons'
 import useCurrentUser from "@/hooks/useCurrentUser"
 import useLoginModal from '@/hooks/useLoginModal'
+import { BsDot } from 'react-icons/bs'
 
 type Props = {
     label:string,
@@ -10,10 +11,11 @@ type Props = {
     icon: IconType
     click?: () => void
     auth?: boolean // indicates a protected route
+    alert?: boolean
 }
 
 const SidebarItem = (props: Props) => {
-    const { label, href, icon:Icon, click, auth } = props
+    const { label, href, icon:Icon, click, auth, alert } = props
 
     const { data:currentuser } = useCurrentUser()
 
@@ -55,6 +57,7 @@ const SidebarItem = (props: Props) => {
                 '
             >
                 <Icon size={28} color='white'/>
+                {alert ? <BsDot className='text-sky-500 absolute -top-4' size={70}/> : null}
             </div>
 
             {/* desktop first div */}
@@ -77,6 +80,7 @@ const SidebarItem = (props: Props) => {
                     className='hidden lg:block text-white text-xl'
                 >
                     {label}
+                    {alert ? <BsDot className='text-sky-500 absolute -top-4 left-0' size={70}/> : null}
                 </p>
             </div>
         </div>
