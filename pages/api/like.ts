@@ -26,7 +26,7 @@ async function handler(req:NextApiRequest, res:NextApiResponse){
             throw new Error("Could not find post")
         }
 
-        // post has been found, extract the liked ids 
+        // post has been found, extract the array of userId's that have liked it
         let updatedLikedIds = [...(post.likedIds || [])]
 
         if(req.method === "POST"){
@@ -35,6 +35,7 @@ async function handler(req:NextApiRequest, res:NextApiResponse){
             //Create notification
             try {
                 if(post?.userId){
+                    // get the user id field from the post
                     await prisma.notification.create({
                         data:{
                             body:"Someone like your tweet!",
