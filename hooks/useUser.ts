@@ -8,7 +8,7 @@ const useUser = (userId: string) =>{
             data, 
             error, 
             isLoading, 
-            mutate 
+            mutate // whenever this is called any subscriber to useuser(userid) gets an update
         } = useSWR(userId ? `/api/users/${userId}` : null, fetcher)
 
     return { data, error, isLoading, mutate }
